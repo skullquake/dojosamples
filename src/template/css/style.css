@@ -1,0 +1,13 @@
+html,body{
+	padding:unset;
+	margin:unset;
+	background:#000000;
+}
+body *{
+	color:#00ff00;
+	background:unset;
+	border:unset;
+	padding:unset;
+	margin:unset;
+	font-family:monospace;
+}
