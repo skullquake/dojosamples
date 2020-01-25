@@ -1,0 +1,161 @@
+define(
+	[
+		"dojo/request"
+	],
+	function(
+		request
+	){
+		console.log("modules/lnksys/logger:constructor():start")
+		lnksys=typeof(lnksys)=='undefined'?{}:lnksys;
+		lnksys.server=typeof(lnksys.server)=='undefined'?{}:lnksys.server;
+		lnksys.server.logger=typeof(lnksys.server.logger)=='undefined'?{}:lnksys.server.logger;
+		lnksys.server.logger.logbuf=typeof(lnksys.server.logger.logbuf)=='undefined'?{}:lnksys.server.logger.logbuf;
+		lnksys.server.logger.logbuf.buf=typeof(lnksys.server.logger.logbuf.buf)=='undefined'?[]:lnksys.server.logger.logbuf.buf;
+		lnksys.server.logger.logbuf.last=typeof(lnksys.server.logger.logbuf.last)=='undefined'?'':lnksys.server.logger.logbuf.last;
+		lnksys.server.logger.logbuf.sending=typeof(lnksys.server.logger.logbuf.sending)=='undefined'?false:lnksys.server.logger.logbuf.sending;
+		lnksys.server.logger.log=function(msg,url,line,lvl){
+			msg=msg==null?'':msg; 
+			url=url==null?'':window.location.pathname;//url; 
+			line=line==null?'':line; 
+			lvl=lvl==null?'info':lvl;
+			if(!lnksys.server.logger.logbuf.sending){
+				if(msg!=lnksys.server.logger.logbuf.last){
+					lnksys.server.logger.logbuf.sending=true;
+					request.post(
+						'/sjs/log.js',
+						{
+							data:JSON.stringify(
+								{
+									'time':new Date().getTime(),
+									'node':'client',
+									'url':url,
+									'msg':msg,
+									'line':line,
+									'lvl':lvl
+								}
+							),
+							headers: {
+								"Content-type":'application/json',
+							}
+						}
+					).then(
+						//success
+						dojo.hitch(
+							this,
+							function(data){
+							}
+						),
+						//fail
+						dojo.hitch(
+							this,
+							function(error){
+							}
+						),
+						//always
+						dojo.hitch(
+							this,
+							function(){
+								lnksys.server.logger.logbuf.sending=false;
+								var nxt=lnksys.server.logger.logbuf.buf.pop();
+								if(nxt!=null)
+									lnksys.server.logger.log(
+										nxt.msg,
+										nxt.url,
+										nxt.line,
+										nxt.lvl
+									);
+							}
+						)
+					);
+				}else{
+				}
+				lnksys.server.logger.logbuf.last=msg;
+			}else{
+				//lnksys.server.logger.logbuf.buf.push({'msg':msg,'url':url,'line':line});
+				lnksys.server.logger.logbuf.buf=[{'msg':msg,'url':url,'line':line,'lvl':lvl}].concat(lnksys.server.logger.logbuf.buf)
+			}
+		};
+		lnksys.log=function(a,b,c,d){
+			lnksys.server.logger.log(a,b,c,d);
+		}
+		//backup
+		lnksys.server.logger.window={};
+		lnksys.server.logger.window.console={};
+		lnksys.server.logger.window.console.log=window.console.log;
+		lnksys.server.logger.window.console.warn=window.console.warn;
+		lnksys.server.logger.window.console.error=window.console.error;
+		lnksys.server.logger.window.console.debug=window.console.debug;
+		lnksys.server.logger.window.onerror=window.onerror
+		lnksys.server.logger.redirect=true;
+		/*
+		window.onerror=function(a,b,c){
+			if(lnksys.server.logger.redirect){
+				lnksys.server.logger.log(a,b,c,'error');
+			}else{
+				lnksys.server.logger.window.onerror(a,b,c);
+			}
+		}
+		window.console.log=function(a){
+			if(lnksys.server.logger.redirect){
+				lnksys.server.logger.log(a,null,null,'info');
+			}else{
+				lnksys.server.logger.window.log(a);
+			}
+		}
+		window.console.warn=function(a){
+			if(lnksys.server.logger.redirect){
+				lnksys.server.logger.log(a,null,null,'warn');
+			}else{
+				lnksys.server.logger.window.warn(a);
+			}
+		}
+		window.console.error=function(a){
+			if(lnksys.server.logger.redirect){
+				lnksys.server.logger.log(a,null,null,'error');
+			}else{
+				lnksys.server.logger.window.error(a);
+			}
+		}
+		window.console.debug=function(a){
+			if(lnksys.server.logger.redirect){
+				lnksys.server.logger.log(a,null,null,'debug');
+			}else{
+				lnksys.server.logger.window.debug(a)
+			}
+		}
+		*/
+		/*
+		*/
+		window.onerror=lnksys.server.logger.log;
+		window.console.log=function(a){lnksys.server.logger.log(a,null,null,'info')};
+		window.console.warn=function(a){lnksys.server.logger.log(a,null,null,'warn')};
+		window.console.error=function(a){lnksys.server.logger.log(a,null,null,'error')};
+		window.console.debug=function(a){lnksys.server.logger.log(a,null,null,'debug')};
+
+		//modify http request for loggin requests - prelim (requires lock)
+		/*
+		var origOpen = XMLHttpRequest.prototype.open;
+		XMLHttpRequest.prototype.open = function() {
+			var _arguments=arguments;
+			this.addEventListener(
+				'load',
+				dojo.hitch(this,function(){
+					if(!lnksys.server.logger.logbuf.sending){
+						console.warn(
+							_arguments[0]+":"+_arguments[1]
+						);//.length);
+						console.warn(arguments.length);
+						console.warn(this.readyState);//Object.keys(a).join(','));//Object.keys(this).join(','));//'request completed!');
+						console.warn(this.responseText);//Object.keys(a).join(','));//Object.keys(this).join(','));//'request completed!');
+					}
+				})
+			)
+			origOpen.apply(this, arguments);
+		}
+		*/
+		console.log("modules/lnksys/logger:constructor():end")
+	}
+);
+
+
+
