@@ -71,7 +71,7 @@ dbstop:
 		-D $(DBPATH) \
 		-o "-p $(DBPORT)" \
 		stop 
-dbpsql: ./db  dbinit ./db//postmaster.pid
+dbpsql: ./db/postmaster.pid
 	psql \
 		-h $(DBHOST) \
 		-p $(DBPORT) \
