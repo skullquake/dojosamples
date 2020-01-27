@@ -43,9 +43,10 @@ run: $(BIN) ./db  dbinit ./db//postmaster.pid
 	$(eval DIRNAM=$(shell date +"%Y%m%d%H%M%S%3N"))
 	$(BIN) 2> ./log/err_$(DIRNAM).log
 dbmk: 
-	initdb \
+	#initdb 
+	/usr/lib/postgresql/10/bin/initdb\
 		$(DBPATH)
-	cp ./res/db/* $(DBPATH)
+	cp ./res/pg/* $(DBPATH)
 dbdrop:
 	printf "DROP DATABASE $(DBNAM);"|\
 		psql \
