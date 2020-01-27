@@ -9,8 +9,12 @@ DBNAM	= test
 DBUSRNAM= test
 DBUSRPAS= 1
 DBUSRROL= NOSUPERUSER
-INITDB=/usr/lib/postgresql/10/bin/initdb
 INITDB=initdb 
+INITDB=/usr/lib/postgresql/10/bin/initdb
+PGCTL=pg_ctl
+PGCTL=/usr/lib/postgresql/10/bin/pg_ctl
+PSQL=psql
+PSQL=/usr/lib/postgresql/10/bin/psql
 BAKROT=./bak
 BAKDIR=$(BAKROT)/$(DIRNAM)
 ERRLOG=./log/err.log
@@ -31,7 +35,7 @@ clean:
 	dbmk	\
 	dbinit	\
 	dbstop	\
-	dbpsql	\
+	db$(PSQL)	\
 	dbsize	\
 	dbdrop \
 	backup \
@@ -50,13 +54,13 @@ dbmk:
 	cp ./res/pg/* $(DBPATH)
 dbdrop:
 	printf "DROP DATABASE $(DBNAM);"|\
-		psql \
+		$(PSQL) \
 		-h $(DBHOST) \
 		-p $(DBPORT) \
 		postgres
-dbinit:dbstart
+dbinit:
 	printf "create database $(DBNAM);CREATE USER $(DBUSRNAM) WITH PASSWORD '$(DBUSRNAM)' CREATEDB;ALTER USER $(DBUSRNAM) WITH $(DBUSRROL);GRANT ALL PRIVILEGES ON SCHEMA public TO $(DBUSRNAM);"|\
-		psql \
+		$(PSQL) \
 		-h $(DBHOST) \
 		-p $(DBPORT) \
 		postgres
@@ -64,29 +68,31 @@ dbrm:
 	rm \
 		-r $(DBPATH)
 dbstart:./db
-	pg_ctl \
+	#if you get permissions error:
+	#sudo chmod a+w /var/run/postgresql
+	$(PGCTL) \
 		-D $(DBPATH) \
 		-o "-p $(DBPORT)" \
 		start
 dbstop:
-	pg_ctl \
+	$(PGCTL) \
 		-D $(DBPATH) \
 		-o "-p $(DBPORT)" \
 		stop 
-dbpsql: ./db/postmaster.pid
-	psql \
+db$(PSQL): ./db/postmaster.pid
+	$(PSQL) \
 		-h $(DBHOST) \
 		-p $(DBPORT) \
 		$(DBNAM)
-dbpsqlusr:
-	psql \
+db$(PSQL)usr:
+	$(PSQL) \
 		-h $(DBHOST) \
 		-p $(DBPORT) \
 		-U test \
 		$(DBNAM)
 dbvacuum:
 	printf "vacuum full;"|\
-		psql \
+		$(PSQL) \
 		-h $(DBHOST) \
 		-p $(DBPORT) \
 		$(DBNAM)
@@ -94,7 +100,7 @@ dbsize:
 	printf "\
 		select pg_database_size('$(DBNAM)'),pg_size_pretty( pg_database_size('$(DBNAM)'));\
 		"|\
-		psql \
+		$(PSQL) \
 		-h $(DBHOST) \
 		-p $(DBPORT) \
 		$(DBNAM)
