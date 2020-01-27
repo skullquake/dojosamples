@@ -9,6 +9,8 @@ DBNAM	= test
 DBUSRNAM= test
 DBUSRPAS= 1
 DBUSRROL= NOSUPERUSER
+INITDB=/usr/lib/postgresql/10/bin/initdb
+INITDB=initdb 
 BAKROT=./bak
 BAKDIR=$(BAKROT)/$(DIRNAM)
 ERRLOG=./log/err.log
@@ -43,8 +45,7 @@ run: $(BIN) ./db  dbinit ./db//postmaster.pid
 	$(eval DIRNAM=$(shell date +"%Y%m%d%H%M%S%3N"))
 	$(BIN) 2> ./log/err_$(DIRNAM).log
 dbmk: 
-	#initdb 
-	/usr/lib/postgresql/10/bin/initdb\
+	$(INITDB)\
 		$(DBPATH)
 	cp ./res/pg/* $(DBPATH)
 dbdrop:
