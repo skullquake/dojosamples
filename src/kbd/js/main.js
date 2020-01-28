@@ -1,6 +1,8 @@
 require(
 	[
-		'lnksys/logger',
+		//'lnksys/logger',
+		'lnksys/widget/dialog/Dialog',
+		'lnksys/widget/toast/Toast',
 		'dojo/dom',
 		'dojo/query',
 		'dojo/on',
@@ -10,7 +12,9 @@ require(
 
 	],
 	function(
-		logger,
+		//logger,
+		dlg,
+		toast,
 		dom,
 		query,
 		on,
@@ -112,6 +116,24 @@ require(
 								inputsidx=inputsmaxidx;
 								inputs[inputsidx].focus();
 								break;
+							case keys.ENTER:
+								event.preventDefault();
+								var t=new Toast();
+								inputs[inputsidx].value==''||
+								inputs[inputsidx].value==null?
+									t.toast(
+										{
+											text:"NO VALUE",
+											loaderBg:'red'
+										}
+									)
+									:
+									t.toast(
+										{
+											text:inputs[inputsidx].value
+										}
+									)
+								;
 							default:
 								break;
 						};

@@ -1,16 +1,3 @@
-html{
-	background:#000000;
-	background-size:cover;
-	/*
-	*/
-}
-body{
-	font-family:ProggySquare;
-	color:#00FF00;
-	font-size:32px;
-	padding:unset;
-	margin:unset;
-	background:#000000;
-	/*
-	*/
+.jq-toast-single{
+	background-color:#515960!important;
 }

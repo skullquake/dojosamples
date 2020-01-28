@@ -16,9 +16,8 @@ var dojoConfig={
 		{ name: "dijit", location: "/lib/dojo/dijit" },
 		{ name: "dojox", location: "/lib/dojo/dojox" },
 		{ name: "xstyle", location: "/lib/xstyle" },
-		{ name: "lnksys", location: "/lib/xstyle" },
 		{ name: "main", location: "/js/modules" },
-		{ name: "lnksys", location: "/js/modules/lnksys" }
+		{ name: "lnksys", location: "/lib/lnksys" }
 
 	]
 };
