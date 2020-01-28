@@ -9,12 +9,12 @@ DBNAM	= test
 DBUSRNAM= test
 DBUSRPAS= 1
 DBUSRROL= NOSUPERUSER
-INITDB=initdb 
 INITDB=/usr/lib/postgresql/10/bin/initdb
-PGCTL=pg_ctl
+INITDB=initdb 
 PGCTL=/usr/lib/postgresql/10/bin/pg_ctl
-PSQL=psql
+PGCTL=pg_ctl
 PSQL=/usr/lib/postgresql/10/bin/psql
+PSQL=psql
 BAKROT=./bak
 BAKDIR=$(BAKROT)/$(DIRNAM)
 ERRLOG=./log/err.log
@@ -113,12 +113,25 @@ sjs_dbdrop:
                 -X GET\
                 http://localhost:1111/sjs/dbdrop.js
 
-lodtst_all:lodtst_goja lodtst_addresource lodtst_formdata lodtst_db_query lodtst_db_exec
+lodtst_all:lodtst_static lodtst_goja lodtst_addresource lodtst_formdata lodtst_db_query lodtst_db_exec
 	echo $@
 $(eval TIMESTAMP= $(shell date +$(LOGFMT)))
 $(eval REPORTDIR= ./log/lodtst/$(TIMESTAMP))
 lodtst_dir:
 	@mkdir -p $(REPORTDIR)
+lodtst_static: lodtst_dir
+	echo $@
+	$(eval REPORTFILE= $(REPORTDIR)/$@.json)
+	@bombardier\
+		-m GET\
+		-d $(LODTSTDUR)\
+		"http://localhost:$(SRVPORT)/!jquery.js!"\
+		-o j\
+		-p r\
+		|jq '.'\
+		> $(REPORTFILE)
+	@cat $(REPORTFILE)
+
 lodtst_goja: lodtst_dir
 	echo $@
 	$(eval REPORTFILE= $(REPORTDIR)/$@.json)

@@ -7,10 +7,12 @@ import (
 	network "github.com/efjoubert/lnksys/network"
 	os "os"
 	runtime "runtime"
+	runtimedbg "runtime/debug"
 )
 
 func main() {
-	runtime.GOMAXPROCS(runtime.NumCPU())
+        runtimedbg.SetGCPercent(25)
+	runtime.GOMAXPROCS(runtime.NumCPU() * 8)
 	RunService(os.Args...)
 }
 

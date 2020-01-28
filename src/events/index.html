@@ -7,7 +7,7 @@
 		-->
 		<title></title>
 		<link rel="stylesheet" href="/lib/fonts/fonts.css"></link>
-		<link rel="stylesheet" href="/lib/bootstrap/BOOTSTRA.386/css/bootstrap.min.css"></link>
+		<link rel="stylesheet" href="/lib/bootstrap/slate/bootstrap.min.css"></link>
 		<!--
 		<link rel="stylesheet" href="/css/style.css"></link>
 		-->
@@ -16,61 +16,63 @@
 	</head>
 	<body>
 		<!-- content -->
-		<div>
-			<h3>
-				Basic Example
-			</h3>
-			<button class="btn btn-default" id="myButton">Click me!</button>
-			<div id="myDiv">Hover over me!</div>
-		</div>
-		<div>
-			<h3>
-				Removing Handles
-			</h3>
-			<button class="btn btn-default" id="myButton2">Click me!</button>
-			<div id="myDiv2">Hover over me!</div>
-		</div>
-		<div>
-			<h3>
-				<code>on.once</code> (same as above)
-			</h3>
-			<button class="btn btn-default" id="myButton3">Click me!</button>
-			<div id="myDiv3">Hover over me!</div>
-		</div>
-		<div>
-			<h3>
-				Running in context with <code>lang.hitch</code>
-			</h3>
-			<button class="btn btn-default" id="myButton4">Click me!</button>
-			<div id="myDiv4">Hover over me!</div>
-		</div>
-		<div>
-			<h3>
-				NodeList events
-			</h3>
+		<div class="container" style="margin-top:24px;margin-bottom:24px;">
 			<div>
-				<div class="btn-group" id="nodelist">
-					<button class="btn btn-default" id="button1">Click me</button>
-					<button class="btn btn-default" id="button2">Click me also</button>
-					<button class="btn btn-default" id="button3">Click me too</button>
-					<button class="btn btn-default" id="button4">Please click me</button>
-				</div>
+				<h3>
+					Basic Example
+				</h3>
+				<button class="btn btn-default" id="myButton">Click me!</button>
+				<div id="myDiv">Hover over me!</div>
 			</div>
-			<div id="msg"></div>
-		</div>
-		<div>
-			<h3>
-				Event Delegation
-			</h3>
 			<div>
-				<div class="btn-group" id="nodelistEvtDel">
-					<button class="btn btn-default" id="clickMe">Click me</button>
-					<button class="btn btn-default" id="clickMe">Click me also</button>
-					<button class="btn btn-default" id="clickMe">Click me too</button>
-					<button class="btn btn-default" id="clickMe">Please click me</button>
-				</div>
+				<h3>
+					Removing Handles
+				</h3>
+				<button class="btn btn-default" id="myButton2">Click me!</button>
+				<div id="myDiv2">Hover over me!</div>
 			</div>
-			<div id="msgEvtDel"></div>
+			<div>
+				<h3>
+					<code>on.once</code> (same as above)
+				</h3>
+				<button class="btn btn-default" id="myButton3">Click me!</button>
+				<div id="myDiv3">Hover over me!</div>
+			</div>
+			<div>
+				<h3>
+					Running in context with <code>lang.hitch</code>
+				</h3>
+				<button class="btn btn-default" id="myButton4">Click me!</button>
+				<div id="myDiv4">Hover over me!</div>
+			</div>
+			<div>
+				<h3>
+					NodeList events
+				</h3>
+				<div>
+					<div class="btn-group" id="nodelist">
+						<button class="btn btn-default" id="button1">Click me</button>
+						<button class="btn btn-default" id="button2">Click me also</button>
+						<button class="btn btn-default" id="button3">Click me too</button>
+						<button class="btn btn-default" id="button4">Please click me</button>
+					</div>
+				</div>
+				<div id="msg"></div>
+			</div>
+			<div>
+				<h3>
+					Event Delegation
+				</h3>
+				<div>
+					<div class="btn-group" id="nodelistEvtDel">
+						<button class="btn btn-default" id="clickMe">Click me</button>
+						<button class="btn btn-default" id="clickMe">Click me also</button>
+						<button class="btn btn-default" id="clickMe">Click me too</button>
+						<button class="btn btn-default" id="clickMe">Please click me</button>
+					</div>
+				</div>
+				<div id="msgEvtDel"></div>
+			</div>
 		</div>
 
 		<!-- load Dojo -->
