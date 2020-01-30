@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="/lib/jquery/jquery.js"></script>
+		<script src="./js/fullscreen.js"></script>
+		<link rel=stylsheet" href="/lib/jquerytoast/jquery.toast.min.css"></link>
+		<title>Ajax</title>
+		<link rel="stylesheet" href="/lib/fonts/fonts.css"></link>
+		<link rel="stylesheet" href="/lib/bootstrap/slate/bootstrap.min.css"></link>
+		<link rel="stylesheet" href="/css/style.css"></link>
+		<!-- configure Dojo -->
+		<script src="./js/dojoconfig.js"></script>
+		<style>
+			.spacer{
+				display:block;
+				height:32px;
+			}
+			.list-unstyled ul{
+				margin-left:8px;
+			}
+			.list-unstyled .badge{
+				margin-left:8px;
+			}
+		</style>
+	</head>
+	<body>
+		<script src="/lib/jquerytoast/jquery.toast.min.js"></script>
+		<!-- content -->
+		<div class="jumbotron">
+			<h3>Dojo Ajax Module Demo</h3>
+		</div>
+		<div class="container" style="margin-top:24px;margin-bottom:24px;">
+			<div class="row">
+				<div class="col-md-12">
+					<div id="example0">
+						<div class="card">
+							<div class="card-header">
+								Example 0: <b>Basic Ajax</b>
+							</div>
+							<div class="card-body">
+								<p>
+									The following example makes a basic <code>GET</code> request with <code>dojo/request</code>, useful for very simple operations like getting text content to be used in the page/JavaScript
+								</p>
+								<!-- <button class="btn btn-default" id="btn">Get Data</button> -->
+								<div id="content">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- //row -->
+			<div class="spacer"></div>
+			<div class="row">
+				<div class="col-md-12">
+					<div id="example1">
+						<div class="card">
+							<div class="card-header">
+								Example 1: <b>Configured Ajax</b>
+							</div>
+							<div class="card-body">
+								<p>
+								<code>dojo/request</code> takes a first argument of type <code>string</code> and a second argument of type <code>object</code> with useful keys <code>headers</code>, <code>data</code>, <i>etc</i>.
+								</p>
+								<!-- <button class="btn btn-default" id="btn">Get Data</button> -->
+								<div id="content">
+								</div>
+								<p>
+									The JavaScript that produced the above was as follows
+								</p>
+								<div class="alert alert-dark">
+<code style="white-space:pre;">request.post(
+ "/sjs/parameters.js",
+ {
+  sync:false,
+  timeout:5000,
+  method:"POST",
+  query:{
+   "KFoo":"QVFoo",
+   "KBar":"QVBar",
+   "KBaz":"QVBaz",
+   "KQux":"QVQux",
+   "KKlutz":"QVKlutz"
+  },
+  headers:{
+   'Content-type':'application/json',
+   'X-Foo':'HdrVFoo',
+   'X-Bar':'HdrVBar',
+   'X-Baz':'HdrVBaz',
+   'X-Qux':'HdrVQux',
+   'X-Klutz':'HdrVKlutz'
+  },
+  data:JSON.stringify({
+   'dk0':'dv0',
+   'dk1':['dv1_0','dv1_1']
+  }),
+  handleAs:'text'
+ }
+).then(
+ function(text){
+  //output response
+ },
+ function(error){
+  //output error
+ }
+);</code>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- //row -->
+			<div class="spacer"></div>
+
+		</div><!-- //container -->
+		<!-- load Dojo -->
+		<script src="/lib/dojo/dojo/dojo.js"></script>
+		<!-- load Application -->
+		<script src="./js/main.js"></script>
+	</body>
+</html>
+

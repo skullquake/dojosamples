@@ -11,6 +11,7 @@ DBMSRegister(
 InvokeListener("0.0.0.0:1111");
 /*MAPRoots("js/","./js");*/
 MAPRoots("lib/","/data/data/com.termux/files/home/src/skullquake/dojosamples/src/lib");
+MAPRoots("sjs/","/data/data/com.termux/files/home/src/skullquake/dojosamples/src/lib/sjs");
 MAPRoots("zippy/","/data/data/com.termux/files/home/src/skullquake/dojosamples/src/lib/test.zip");
 //MAPRoots("asdf","http://localhost:1111");
 MAPRoots("asdf","https://raw.githubusercontent.com/skullquake/lnksyssamples/master/src");

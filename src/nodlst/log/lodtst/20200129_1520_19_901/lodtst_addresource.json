@@ -1,0 +1,47 @@
+{
+  "spec": {
+    "numberOfConnections": 125,
+    "testType": "timed",
+    "testDurationSeconds": 10,
+    "method": "GET",
+    "url": "http://localhost:1111/tst/lod/fib.js",
+    "body": "",
+    "stream": false,
+    "timeoutSeconds": 2,
+    "client": "fasthttp"
+  },
+  "result": {
+    "bytesRead": 14715,
+    "bytesWritten": 55480,
+    "timeTakenSeconds": 19.903185385,
+    "req1xx": 0,
+    "req2xx": 60,
+    "req3xx": 0,
+    "req4xx": 0,
+    "req5xx": 0,
+    "others": 106,
+    "errors": [
+      {
+        "description": "the server closed connection before returning the first response byte. Make sure the server returns 'Connection: close' response header before closing the connection",
+        "count": 106
+      }
+    ],
+    "latency": {
+      "mean": 8399499.927710844,
+      "stddev": 3281861.8860053075,
+      "max": 10263795
+    },
+    "rps": {
+      "mean": 4.061033312408168,
+      "stddev": 24.356777984732112,
+      "max": 351.67559353294706,
+      "percentiles": {
+        "50": 0,
+        "75": 0,
+        "90": 0,
+        "95": 0,
+        "99": 100.83017
+      }
+    }
+  }
+}
