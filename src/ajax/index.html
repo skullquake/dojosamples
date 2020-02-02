@@ -112,7 +112,55 @@
 				</div>
 			</div><!-- //row -->
 			<div class="spacer"></div>
-
+			<div class="row">
+				<div class="col-md-12">
+					<div id="example2">
+						<div class="card">
+							<div class="card-header">
+								Example 2: <b>Response Headers</b>
+							</div>
+							<div class="card-body">
+								<p>
+									To access response headers, <code>request</code> has to be used
+									in a slightly different way where you use the <code>get</code>
+									or <code>post</code> method and make a request as usual,
+									but store the return value of the function call (which is a
+									<code>Promise</code>) and then call <code>promise.response.then</code>
+									to gain access to a <code>response</code> object with more information
+									on it
+								</p>
+								<!-- <button class="btn btn-default" id="btn">Get Data</button> -->
+								<div id="content">
+								</div>
+								<div id="headers">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- //row -->
+			<div class="spacer"></div>
+			<div class="row">
+				<div class="col-md-12">
+					<div id="example3">
+						<div class="card">
+							<div class="card-header">
+								Example 3: <b>Handling JSON</b>
+							</div>
+							<div class="card-body">
+								<p>
+									When <code>handleAs</code> is set to <code>json</code> the response data
+									will be parsed into <code>JSON</code>
+								</p>
+								<!-- <button class="btn btn-default" id="btn">Get Data</button> -->
+								<div id="content">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- //row -->
+			<div class="spacer"></div>
 		</div><!-- //container -->
 		<!-- load Dojo -->
 		<script src="/lib/dojo/dojo/dojo.js"></script>

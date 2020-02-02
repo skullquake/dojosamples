@@ -1,0 +1,49 @@
+define(
+	[
+		"dojo/_base/declare",
+		"dijit/_WidgetBase",
+		"dijit/_TemplatedMixin",
+		"dijit/parser",
+		"dojo/ready"
+	],
+	function(
+		declare,
+		_WidgetBase,
+		_TemplatedMixin,
+		parser,
+		ready
+	){
+		declare(
+			"TestWidget",
+			[
+				_WidgetBase,
+				_TemplatedMixin
+			],
+			{
+				templateString:'<span class="badge" data-dojo-attach-point="msgNode"></span>',
+				constructor:function(){
+				},
+				postCreate:function(){
+				},
+				destroy:function(){
+				},
+				//attributes
+				msg:'no message',
+				_setMsgAttr:{
+					node:'msgNode',
+					type:'innerHTML'
+				},
+				msgClass:"badge badge-info",
+				_setMsgClassAttr:{
+					node:'msgNode',
+					type:'class'
+				}
+				/*
+				*/
+			}
+		);
+		ready(function(){
+			dojo.parser.parse();
+		});
+	}
+);

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="/lib/jquery/jquery.js"></script>
+		<script src="./js/fullscreen.js"></script>
+		<link rel=stylsheet" href="/lib/jquerytoast/jquery.toast.min.css"></link>
+		<title>Object Augmentation</title>
+		<link rel="stylesheet" href="/lib/fonts/fonts.css"></link>
+		<link rel="stylesheet" href="/lib/bootstrap/slate/bootstrap.min.css"></link>
+		<link rel="stylesheet" href="/css/style.css"></link>
+		<!-- configure Dojo -->
+		<script src="./js/dojoconfig.js"></script>
+		<style>
+			.spacer{
+				display:block;
+				height:32px;
+			}
+			.list-unstyled ul{
+				margin-left:8px;
+			}
+			.list-unstyled .badge{
+				margin-left:8px;
+			}
+		</style>
+	</head>
+	<body>
+		<script src="/lib/jquerytoast/jquery.toast.min.js"></script>
+		<!-- content -->
+		<div class="jumbotron">
+			<h3>Augmenting Objects with Dojo</h3>
+		</div>
+		<div class="container" style="margin-top:24px;margin-bottom:24px;">
+			<div class="row">
+				<div class="col-md-12">
+					<div id="example0">
+						<div class="card">
+							<div class="card-header">
+								Example 0: <b>lang.mixin</b>
+							</div>
+							<div class="card-body">
+								<p>
+									<code>lang.mixing</code> allows you to combine properties of objects. Note that a shallow copy is utilized.
+								</p>
+								<h6>Object A</h6>
+								<div class="alert alert-dark" id="obja" style="white-space:pre"></div>
+								<h6>Object B</h6>
+								<div class="alert alert-dark" id="objb" style="white-space:pre"></div>
+								<h6>lang.mixin(A,B)</h6>
+								<div class="alert alert-dark" id="objmixinab" style="white-space:pre"></div>
+								<p>
+									You can mix multiple objects at the same time, e.g.
+									<code>lang.mixin(A,B,C,...<i>N</i>)</code>, and the properties
+									will be mixed into the first argument.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- //row -->
+			<div class="spacer"></div>
+			<div class="row">
+				<div class="col-md-12">
+					<div id="example1">
+						<div class="card">
+							<div class="card-header">
+								Example 1: <b>declare.safeMixin</b>
+							</div>
+							<div class="card-body">
+								<p>
+									<code>declare.safeMixin</code> operates on objects instantiated
+									from classes created with <code>dojo/_base/declare</code> calls.
+									<code>declare.safeMixin</code> does much the same as <code>lang.mixin</code>
+									with three differences: 1) It can only mix one object at a time
+									2) it will not mix in constructors 3) function annotations will be added
+									enabling <code>this.inherited</code> to work properly.
+								</p>
+								<p>
+									<code>declared</code> constructors expose an <code>extend</code> method,
+									which uses <code>declare.safeMixin</code> under the hood.
+								</p>
+								<p>
+									Declaring <code>ObjA</code> with member <code>'foo':'bar'</code>,
+									and instantiating <code>objA</code>
+								</p>
+								<div class="alert alert-dark" id="obja" style="white-space:pre"></div>
+								<p>
+									Now we instantiage <code>objB</code> an instance of <code>ObjA</code>,
+									and call <code>declare.safeMixin</code> on it to add <code>'baz':'qux'</code>
+								</p>
+								<div class="alert alert-dark" id="objsafemixinba" style="white-space:pre"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- //row -->
+			<div class="spacer"></div>
+			<div class="row">
+				<div class="col-md-12">
+					<div id="example2">
+						<div class="card">
+							<div class="card-header">
+								Example 2: <b>lang.extend</b>
+							</div>
+							<div class="card-body">
+								<p>
+									<code>lang.extend</code> mixes in on the prototype
+									level, meaning that after applying it, all instantiated
+									objects having the prototype to which <code>extend</code>
+									was applied, will be affected immediately.
+								</p>
+								<div class="alert alert-dark" id="obja" style="white-space:pre"></div>
+								<div class="alert alert-dark" id="objextba" style="white-space:pre"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- //row -->
+			<div class="spacer"></div>
+		</div><!-- //container -->
+		<!-- load Dojo -->
+		<script src="/lib/dojo/dojo/dojo.js"></script>
+		<!-- load Application -->
+		<script src="./js/main.js"></script>
+	</body>
+</html>
+

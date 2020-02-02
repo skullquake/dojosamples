@@ -21,6 +21,14 @@
 	}
 	try{
 		out.Print('----------------------------------------\n');
+		out.Print('request.ResponseHeader():\n');
+		out.Print('----------------------------------------\n');
+		printkeys(request.ResponseHeader());
+		out.Print('----------------------------------------\n');
+		out.Print('request.ResponseHeaders():\n');
+		out.Print('----------------------------------------\n');
+		printkeys(request.ResponseHeaders());
+		out.Print('----------------------------------------\n');
 		out.Print('request.RequestHeaders():\n');
 		out.Print('----------------------------------------\n');
 		printkeys(request.RequestHeaders());

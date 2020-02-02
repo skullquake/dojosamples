@@ -2,6 +2,18 @@
 // curl -X POST -H "Content-type: application/jsonz" -H "X-foo: fooval" -d '{"asdf":"foo","qwer":["asdf":"fdsa","qwer":"rewq"]}' "http://localhost:1111/sjs/parameters.js?uk0=uv0&uk1=uv1"
 CPrintln("parameters");
 try{
+	//remember to set first!
+	request.ResponseHeader().Add("Content-type","text/plain");
+	var arrHdr=[
+		"X-foo",
+		"X-bar",
+		"X-baz",
+		"X-qux",
+		"X-klutz"
+	];
+	arrHdr.forEach(function(h,hidx){
+		request.ResponseHeader().Add(h,h+"_value");
+	});
 	function printkeys(o){
 		if(o!=null){
 			out.Println("\ttype: "+typeof(o));
@@ -31,16 +43,10 @@ try{
 	});
 	out.Println("----------------------------------------");
 	out.Println("Headers:");
-	[
-		"Content-type",
-		"X-Foo",
-		"X-Bar",
-		"X-Baz",
-		"X-Qux"
-	].forEach(function(k,kidx){
+	request.RequestHeaders().forEach(function(k,kidx){
 		out.Println(
 			k+":"+
-			request.RequestHeaders().Get(k)
+			request.RequestHeader().Get(k)
 		);
 	})
 	out.Println("----------------------------------------");

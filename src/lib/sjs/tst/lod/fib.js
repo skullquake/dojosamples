@@ -45,7 +45,7 @@ var idx=parseInt(
 	Parameters()
 	.Parameter('idx')[0]
 );
-CPrintln(idx+':'+a);out.Print(idx+':'+a);
+//CPrintln(idx+':'+a);out.Print(idx+':'+a);
 if(idx<32){
 	var c=b+a;
 	idx++;

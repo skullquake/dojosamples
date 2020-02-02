@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="/lib/jquery/jquery.js"></script>
+		<script src="./js/fullscreen.js"></script>
+		<link rel=stylsheet" href="/lib/jquerytoast/jquery.toast.min.css"></link>
+		<title>Dojo OOPS</title>
+		<link rel="stylesheet" href="/lib/fonts/fonts.css"></link>
+		<link rel="stylesheet" href="/lib/bootstrap/slate/bootstrap.min.css"></link>
+		<link rel="stylesheet" href="/css/style.css"></link>
+		<!-- configure Dojo -->
+		<script src="./js/dojoconfig.js"></script>
+		<!-- load Dojo -->
+		<script src="/lib/dojo/dojo/dojo.js"></script>
+		<!-- load Application -->
+		<script src="./js/main.js"></script>
+		<link rel="stylesheet" href="/lib/prism/prism.css"></link>
+		<style>
+			.spacer{
+				display:block;
+				height:32px;
+			}
+			.list-unstyled ul{
+				margin-left:8px;
+			}
+			.list-unstyled .badge{
+				margin-left:8px;
+			}
+		</style>
+		<link rel=stylsheet" href="/lib/dojo/dijit/themes/claro/claro.css"/>
+	</head>
+	<body class="claro">
+		<script src="/lib/jquerytoast/jquery.toast.min.js"></script>
+		<!-- content -->
+		<div class="jumbotron">
+			<h3>Dojo OOPS</h3>
+		</div>
+		<div class="container" style="margin-top:24px;margin-bottom:24px;">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							OOPS: <b>Creating Classes in Dojo</b>
+						</div>
+						<div class="card-body">
+							<p>
+								<code>dojo/_base/declare</code> provides features for class creation
+								and subclassing. In this example we will demonstrate this by creating
+								some custom widget classes and subclassing them
+							</p>
+							<p>
+								Firstly, an overview of the lifecycle of such a widget:
+							</p>
+							<pre><code class="language-javascript" >* constructor (common to all prototypes, called when instantiated)
+* postscript (common to all prorotypes built using <code>declare</code>
+  * create
+    * postMixInProperties
+    * buildRendering
+    * postCreate
+  * startup</code></pre>
+							<p>
+								Let's go into the specifics of destruction now
+							</p>
+							<pre><code class="language-javascript" >* destroyRecursive
+  * destroyDescendants
+  * destroy
+    * uninitialize
+    * destroyRendering</code></pre>
+							<p>
+								In order to verify all of this, we will manually define all of these functions
+								in our widget, log out the name of the function, and call <code>this.inherited(arguments)</code>
+								in order to ensure their original inherited invocation, which in this case delivers the following
+								results
+							</p>
+							<pre><code class="language-javascript" >[1580636908659:warn:client:/index.html]: NO ID YET:constructor
+[1580636908700:warn:client:/index.html]: NO ID YET:postscript
+[1580636908732:warn:client:/index.html]: WidgetA_0:buildRendering
+[1580636908763:warn:client:/index.html]: WidgetA_0:postCreate
+[1580636908787:warn:client:/index.html]: WidgetA_0:setupEvents</code></pre>
+							<p>
+								<i>Tear-down</i> delivers the following results
+							</p>
+							<pre><code class="language-javascript" >[1580637639383:warn:client:]: WidgetA_0:destroyRecursive
+[1580637639526:warn:client:/index.html]: WidgetA_0:destroy
+[1580637639591:warn:client:/index.html]: WidgetA_0:uninitialize
+[1580637639641:warn:client:/index.html]: WidgetA_0:destroyRendering</code></pre>
+						</div>
+					</div>
+				</div>
+			</div><!-- //row -->
+			<div class="spacer"></div>
+			<div class="row" id="example0">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							Example 0: <b>WidgetA</b>
+						</div>
+						<div class="card-body">
+							<p>
+								<code>/js/WidgetA.js</code>, declared as <code>WidgetA</code>,
+								with <i>mixins</i> <code>dijit/_WidgetBase</code> and
+								<code>dijit/_TemplatedMixin</code>, constitutes a basic widget,
+								with a DOM attachpoint <code>msgNode</code> and 
+								attribute <code>msg</code> with getters and setters
+								that populates DOM attachpoint <code>msgNode</code>
+							</p>
+							<div id="content"></div>
+						</div>
+					</div>
+				</div>
+			</div><!-- //row -->
+			<div class="spacer"></div>
+			<div class="row" id="example1">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							Example 1: <b>WidgetB</b>
+						</div>
+						<div class="card-body">
+							<p>
+								Here we inherit from <code>WidgetA</code> addming some interactivity
+							</p>
+							<div id="content"></div>
+						</div>
+					</div>
+				</div>
+			</div><!-- //row -->
+			<div class="spacer"></div>
+			<div class="row" id="example2">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							Example 2: <b>WidgetC</b>
+						</div>
+						<div class="card-body">
+							<p>
+							And now we extend the <code>onClick</code> member again, this time from
+							<code>WidgetB</code>
+							</p>
+							<div id="content"></div>
+						</div>
+					</div>
+				</div>
+			</div><!-- //row -->
+			<div class="spacer"></div>
+
+		</div><!-- //container -->
+		<script src="/lib/prism/prism.js"></script>
+	</body>
+</html>
+
